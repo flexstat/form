@@ -1,0 +1,134 @@
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+<p class="reviews"> {{message}} </p>
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+</div>
+
+{% endfor %}
+{% endif %}
+
+
+  <form method="post" action='{% url "add_page" %}' id="request_form" class="needs-validation" data-parsley-validate="true" novalidate>
+    {% csrf_token %}
+ 
+<div class="container mt-5"  id="app">
+  
+    <div class="col-4">
+    <div class="mb-3">
+        <label for="validationCustom01" class="form-label">Имя</label>
+        <input type="text" class="form-control" id="exampleInput1" name="name" v-model="message" value="" required> <!-- <span v-show="visible" v-on:click="message=''" class="badge bg-dark">Clear</span> -->
+        <div v-on:click="message='Иван Быстров'" id="emailHelp" class="form-text">Укажите ваше имя (<span style="font-size:8px; color:#558686;">click me for speed</span>)</div>
+        <div class="valid-feedback">
+          Данные заполнены корректно
+        </div>
+        <div class="invalid-feedback">
+          Пожалуйста, укажите ваше имя 
+        </div>
+
+      </div>
+
+    <div class="mb-3">
+      <label for="validationCustom02" class="form-label">E-mail</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" v-model="message1" value=""  required>
+      <div  v-on:click="message1='ivan@bistrov.speed'"  id="emailHelp" class="form-text">Укажите почтовый ящик (<span style="font-size:8px; color:#558686;">click me for speed</span>)</div>
+      <div class="valid-feedback">
+        Данные заполнены корректно
+      </div>
+      <div class="invalid-feedback">
+        Пожалуйста, укажите корректный email вида: "имя_почты@почтовый_доме.зона"
+      </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="validationCustom04" class="form-label">Телефон для связи </label>
+        <input type="phone" class="form-control" id="exampleInputPassword1" name="phone"  v-model="message2" value="" required>
+        <div v-on:click="message2='+000000000'" id="emailHelp" class="form-text">Укажите телефон для связи (<span style="font-size:8px; color:#558686;">click me for speed</span>)</div>
+        <div class="valid-feedback">
+          Данные заполнены корректно !
+        </div>
+        <div class="invalid-feedback">
+          Пожалуйста, заполните это поле
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="validationCustom05" class="form-label">Домен</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="domain_name"  v-model="message3" value="">
+        <div  v-on:click="message3='speedinput.est'"  id="emailHelp" class="form-text">Укажите домен (<span style="font-size:8px; color:#558686;">click me for speed</span>)</div>
+        <div class="valid-feedback">
+          Данные заполнены корректно !
+        </div>
+        <div class="invalid-feedback">
+          Пожалуйста, заполните это поле
+        </div>
+      </div>
+  
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput5" class="form-label">Описание</label>
+
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" v-model="message4" value=""> </textarea>
+        <div  v-on:click="message4='fast input block'"  id="emailHelp" class="form-text">Опишите ситуацию (<span style="font-size:8px; color:#558686;">click me for speed</span>)</div>
+        <div class="valid-feedback">
+          Данные заполнены корректно !
+        </div>
+        <div class="invalid-feedback">
+          Пожалуйста, заполните это поле
+        </div>
+      </div>
+
+ 
+      <div class="mb-3">
+        <label for="exampleFormControlInput6" class="form-label">Откуда узнали</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" name="inform" v-model="message5" value="">
+        <div  v-on:click="message5='internet'" id="emailHelp" class="form-text">Откуда узнали о ресурсе (<span style="font-size:8px; color:#558686;">click me for speed</span>)</div>
+        <div class="valid-feedback">
+          Данные заполнены корректно !
+        </div>
+        <div class="invalid-feedback">
+          Пожалуйста, заполните это поле
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Отправить</button>
+  </form>
+
+
+  <script>
+
+  </script>
+
+
+</div>
+
+<script>
+(function () {
+  'use strict'
+
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Зацикливайтесь на них и предотвращайте отправку
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+</script>
+
+
+{% endblock %}

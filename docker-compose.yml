@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./app
+    command: python manage.py runserver 0.0.0.0:8282
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8282:8282
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - ./storage/postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_DB=hello_django_dev
+
+volumes:
+  postgres_data:
